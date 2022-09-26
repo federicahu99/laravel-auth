@@ -17,6 +17,20 @@ Route::get('/', function () {
     return view('guest.home');
 });
 
-Auth::routes();
+Auth::routes(['register'=> false]);
 
-Route::get('/admin', 'HomeController@index')->name('admin.home');
+Route::get('/admin', 'Admin\HomeController@index')->middleware('auth')->name('admin.home');
+
+//amministrazione
+Route::middleware('auth') //
+    ->prefix('admin') //ulr iniziale
+    ->namespace('Admin') //controller folder
+    ->name('admin.') // aggiunge al nome
+    ->group(function () {
+
+    // Admin
+    Route::get('/', 'HomeController@index')->name('home');
+
+    // Posts
+    // Route::resource('posts','PostController');
+});
