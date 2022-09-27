@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +29,7 @@ Route::middleware('auth')
         Route::get('/', 'HomeController@index')->name('home');
 
         // Posts
-        // Route::resource('posts','PostController');
+        Route::resource('posts','PostController');
 
         Route::get('/{any}', function () { //qualunque cosa crivo dopo /admin mi manda alla 404
             abort('404');
