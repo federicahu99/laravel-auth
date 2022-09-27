@@ -27,7 +27,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $post = new Post();
+        return view('admin.posts.create', compact('post'));
     }
 
     /**
@@ -64,9 +65,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($id);
         return view('admin.posts.edit', compact('post'));
     }
 
@@ -77,14 +77,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        $post = Post::findOrFail($id);
-
         $data = $request->all();
-        $post->fill($data);
-        $post->save();
-        return redirect()-> route('admin.posts.show', $post);
+        $data['slug'] = Str::slug($data['title'], '-');
+        $post->update($data); // fill and save
+        return redirect()->route('admin.posts.show', $post)->with('message', 'The post has been updated');
     }
 
     /**
@@ -96,6 +94,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()-> route('admin.posts.index')->with('delete', 'The post has been deleted');
+        return redirect()-> route('admin.posts.index')->with('message', 'The post has been deleted');
     }
 }

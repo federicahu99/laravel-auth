@@ -2,14 +2,21 @@
 
 @section('content')
 
-<div class="container">
-    <header class="d-flex justify-content-between">
-        <h2>Post</h2>
-        <a href=" {{ route('admin.posts.create') }} " class="btn btn-success mb-2">
-            <i class="fa-regular fa-square-plus mr-1"></i>Crea post
-        </a>
-
+@section('title')
+    <header class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class=>
+            <h2>Post</h2>
+            </div>
+            <div>
+            <a href=" {{ route('admin.posts.create') }} " class="btn btn-success my-2">
+                <i class="fa-regular fa-square-plus mr-1"></i>Crea post
+            </a>
+            </div>
     </header>
+        @endsection
+
+
     <table class="table container">
         <thead class="thead-dark">
             <tr>
@@ -32,7 +39,10 @@
                 <td> {{ $post->updated_at}} </td>
                 <td class="d-flex align-items-start">
                     <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-sm btn-primary mr-1">
-                        <i class="fa-solid fa-eye"></i>View
+                        <i class="fa-solid fa-eye"></i> View
+                    </a>
+                    <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-sm btn-warning mr-1">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
                     </a>
                     <form action="{{ route('admin.posts.destroy' , $post->id) }}" method='POST'>
                         @csrf

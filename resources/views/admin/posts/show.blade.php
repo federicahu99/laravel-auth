@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
+@include('includes/admin/alert')
 @section('content')
-
 
 <div class="container">
     <header>
@@ -18,10 +18,13 @@
             <time>Updated at: {{ $post->updated_at }} </time>
         </div>
     </div>
-    <footer class="d-flex align-items-center justify-content-between">
+    <footer class="d-flex align-items-center justify-content-end">
         <div>
             <a href=" {{ route('admin.posts.index') }} " class="btn btn-primary">
                 <i class="fa-solid fa-door-open"></i> All posts
+            </a>
+            <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-warning mr-1">
+                <i class="fa-solid  btn-l fa-pen-to-square"></i> Edit
             </a>
         </div>
         <div>
