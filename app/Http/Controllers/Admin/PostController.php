@@ -39,6 +39,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' =>'required|string|min:5|max:50|unique:posts',
+            'content' =>'required|string',
+            'image' =>'nullable|url',
+        ],[
+            'title.required' => 'The title is required',
+            'title.unique' => '$request->title already exsist',
+            'title.min' => 'The title must be at least 5 characters long',
+            'title.max' => 'The title can\'t be longer than 50 characters',
+            'title.required' => 'the title is required',
+            'content.required' => 'Content is required',
+            'image' => 'Invalid url'
+        ]);
         $data = $request->all();
         $post = new Post();
         $post->fill($data);
