@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 <div class="container">
     <header>
         <h1> {{ $post->title }} </h1>
@@ -26,7 +28,7 @@
             <form action=" {{ route('admin.posts.destroy' , $post->id) }} " methods='POST'>
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger">
+                <button class="btn btn-danger" type="submit">
                     <i class="fa-solid fa-trash"></i> Delete
                 </button>
             </form>
