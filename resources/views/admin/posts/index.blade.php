@@ -22,6 +22,11 @@
             <td> {{ $post->slug }} </td>
             <td> {{ $post->created_at}} </td>
             <td> {{ $post->updated_at}} </td>
+            <td>
+                <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-primary">
+                    <i class="fa-solid fa-eye"></i> Dettagli
+                </a>
+            </td>
         </tr>
         @empty
         <tr>
