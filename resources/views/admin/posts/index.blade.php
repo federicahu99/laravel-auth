@@ -6,7 +6,7 @@
     <header class="d-flex justify-content-between">
         <h2>Post</h2>
         <a href=" {{ route('admin.posts.create') }} " class="btn btn-success mb-2">
-            <i class="fa-regular fa-square-plus"></i>Crea post
+            <i class="fa-regular fa-square-plus mr-1"></i>Crea post
         </a>
 
     </header>

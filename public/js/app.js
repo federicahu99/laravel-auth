@@ -37302,6 +37302,8 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./preview_img.js */ "./resources/js/preview_img.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37346,6 +37348,24 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/preview_img.js":
+/*!*************************************!*\
+  !*** ./resources/js/preview_img.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var imgPrev = document.getElementById('preview');
+var imgUrl = document.getElementById('image');
+var placeholder = 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image-300x225.png';
+imgUrl.addEventListener('input', function () {
+  // if(imgUrl.value) imgPrev.src= imgUrl.value;
+  // else imgPrev.src= placeholder;
+  imgPrev.src = imgUrl.value || placeholder;
+});
 
 /***/ }),
 
