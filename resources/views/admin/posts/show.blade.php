@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-@include('includes/admin/alert')
 @section('content')
 
 <div class="container">
