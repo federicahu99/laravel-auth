@@ -16,10 +16,10 @@ class AddCategoryIdPostTable extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->unsignedBigInteger('category_id')->nullable()->after('id');
             //foreign key
-            $table->foreign('category_id')->reference('id')->on('categories')->onDelete('set null'); //cancello la categoria ma non i post
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null'); //cancello la categoria ma non i post
 
             // oppure
-            // $table->foreingID('category_id')->nullable()->after('id')->onDelete('set null')->constrained();
+            // $table->foreingId('category_id')->nullable()->after('id')->onDelete('set null')->constrained();
         });
     }
 
@@ -34,7 +34,7 @@ class AddCategoryIdPostTable extends Migration
             // elimino relazione 
             $table->dropForeign('post_category_id_foreign');
             // elimino la colonna
-            $table->dropColumn('column_id');
+            $table->dropColumn('category_id');
         });
     }
 }

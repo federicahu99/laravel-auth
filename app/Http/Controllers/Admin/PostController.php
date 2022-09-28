@@ -41,21 +41,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
-             'title' =>'required|string|min:5|max:50|unique:posts',
-             'content' =>'required|string',
-             'image' =>'nullable|url',
-             'category_id' =>'nullable|exist:categories_id',
-         ],[
-             'title.required' => 'The title is required',
-             'title.unique' => '$request->title already exsist',
-             'title.min' => 'The title must be at least 5 characters long',
-             'title.max' => 'The title can\'t be longer than 50 characters',
-             'title.required' => 'the title is required',
-             'content.required' => 'Content is required',
-             'image' => 'Invalid url',
-             'category_id.exisist'=> 'Select a valid category'
-         ]);
+        // $request->validate([
+        //     'title' =>'required|string|min:5|max:50|unique:posts',
+        //     'content' =>'required|string',
+        //     'image' =>'nullable|url',
+        //     'category_id' =>'nullable|exist:categories_id',
+        // ],[
+        //     'title.required' => 'The title is required',
+        //     'title.unique' => '$request->title already exsist',
+        //     'title.min' => 'The title must be at least 5 characters long',
+        //     'title.max' => 'The title can\'t be longer than 50 characters',
+        //     'title.required' => 'the title is required',
+        //     'content.required' => 'Content is required',
+        //     'image' => 'Invalid url',
+        //     'category_id.exist'=> 'Select a valid category'
+        // ]);
 
         $data = $request->all();
         $post = new Post();
@@ -86,7 +86,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories= Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -98,6 +99,21 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        // $request->validate([
+        //     'title' =>'required|string|min:5|max:50|unique:posts',
+        //     'content' =>'required|string',
+        //     'image' =>'nullable|url',
+        //     'category_id' =>'nullable|exist:categories_id',
+        // ],[
+        //     'title.required' => 'The title is required',
+        //     'title.unique' => '$request->title already exsist',
+        //     'title.min' => 'The title must be at least 5 characters long',
+        //     'title.max' => 'The title can\'t be longer than 50 characters',
+        //     'title.required' => 'the title is required',
+        //     'content.required' => 'Content is required',
+        //     'image' => 'Invalid url',
+        //     'category_id.exist'=> 'Select a valid category'
+        // ]);
         $data = $request->all();
         $data['slug'] = Str::slug($request->title, '-');
         $post->update($data); // fill and save
