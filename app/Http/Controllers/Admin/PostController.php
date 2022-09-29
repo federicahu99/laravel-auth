@@ -16,9 +16,9 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $categories = Category::all();
-        $posts= Post::orderBy('updated_at', 'DESC')->orderBy('created_at', 'DESC')->get();
+        $posts = Post::orderBy('updated_at', 'DESC')->orderBy('created_at', 'DESC')->get();
         return view('admin.posts.index', compact('posts', 'categories'));
     }
 
@@ -30,7 +30,7 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
-        $categories= Category::all();
+        $categories = Category::all();
         return view('admin.posts.create', compact('post', 'categories'));
     }
 
@@ -62,7 +62,7 @@ class PostController extends Controller
         $post = new Post();
         $post->fill($data);
         $post->slug = Str::slug($post->title, '-');
-        
+
         $post->save();
 
         return redirect()->route('admin.posts.show', $post)->with('message', 'Post created succesfully.');
@@ -76,7 +76,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $categories= Category::all();
+        $categories = Category::all();
         return view('admin.posts.show', compact('post', 'categories'));
     }
 
@@ -88,7 +88,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $categories= Category::all();
+        $categories = Category::all();
         return view('admin.posts.edit', compact('post', 'categories'));
     }
 
@@ -117,9 +117,12 @@ class PostController extends Controller
         //     'category_id.exist'=> 'Select a valid category'
         // ]);
         $data = $request->all();
+        dd($data);
         $data['slug'] = Str::slug($request->title, '-');
         $post->update($data); // fill and save
-        
+        $category_id = $data['category_id'];
+        $post->category_id = $category_id;
+        $post->update();
         return redirect()->route('admin.posts.show', $post)->with('message', 'The post has been updated');
     }
 
@@ -132,6 +135,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()-> route('admin.posts.index')->with('message', 'The post has been deleted');
+        return redirect()->route('admin.posts.index')->with('message', 'The post has been deleted');
     }
 }
