@@ -32,7 +32,7 @@ class AddCategoryIdPostTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             // elimino relazione 
-            $table->dropForeign('post_category_id_foreign');
+            $table->dropForeign('posts_category_id_foreign');
             // elimino la colonna
             $table->dropColumn('category_id');
         });

@@ -27,6 +27,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Titolo</th>
+            <th scope="col">User</th>
             <th scope="col">Category</th>
             <th scope="col">Data creazione</th>
             <th scope="col">Data modifica</th>
@@ -39,6 +40,12 @@
         <tr>
             <th scope="row"> {{ $post->id }} </th>
             <td> {{ $post->title }} </td>
+            <td> 
+                @if ($post->user)
+                {{ $post->user->name }}
+                @else anonimo
+                @endif 
+            </td>
             <td>@if($post->category) {{ $post->category->label }} 
                 @else Nessuna
                 @endif 

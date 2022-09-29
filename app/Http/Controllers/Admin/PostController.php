@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -62,9 +63,9 @@ class PostController extends Controller
         $post = new Post();
         $post->fill($data);
         $post->slug = Str::slug($post->title, '-');
-
+        $post->user_id = Auth::id(); // id utente autenticato
         $post->save();
-
+        
         return redirect()->route('admin.posts.show', $post)->with('message', 'Post created succesfully.');
     }
 
@@ -117,7 +118,6 @@ class PostController extends Controller
         //     'category_id.exist'=> 'Select a valid category'
         // ]);
         $data = $request->all();
-        dd($data);
         $data['slug'] = Str::slug($request->title, '-');
         $post->update($data); // fill and save
         $category_id = $data['category_id'];
