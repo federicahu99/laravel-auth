@@ -16,9 +16,10 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $categories = Category::all();
         $posts= Post::orderBy('updated_at', 'DESC')->orderBy('created_at', 'DESC')->get();
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.posts.index', compact('posts', 'categories'));
     }
 
     /**
@@ -75,7 +76,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('admin.posts.show', compact('post'));
+        $categories= Category::all();
+        return view('admin.posts.show', compact('post', 'categories'));
     }
 
     /**

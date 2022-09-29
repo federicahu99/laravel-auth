@@ -37,7 +37,7 @@
                     <select class="custom-select" id="category_id" name="category_id">
                       <option selected>Categoria...</option>
                         @foreach($categories as $category)
-                        <option @if( old('category_id', $post->category_id) == $category->id) selected @endif
+                        <option @if(old('category_id', $post->category_id) == $category->id) selected @endif
                         value="{{ $category->id }}"> {{ $category->label }}</option>
                         @endforeach
                     </select>

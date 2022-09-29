@@ -11,6 +11,7 @@
         @if($post->image)
         <img src=" {{ $post->image }} " alt="" class="float-left p-2">
         @endif
+
         <p class="pt-5"> {{ $post->content }} </p>
         <p class="pt-5"> Category: @if($post->category) {{ $post->category->label }} 
         @else Nessuna
