@@ -58,20 +58,27 @@
                 </div>
                 
                     {{-- checkbox --}}
+                @if(count($tags))
                 <div class="form-group col-12">
+                    <h3>Tags</h3>
                     @foreach($tags as $tag)
-                        <input type="checkbox">
-                        <label for="checkbox" class="mr-3">{{ $tag->label }}</label>
+                        <input type="checkbox" 
+                        id="tag-{{$tag->label}}" 
+                        name="tags[]" 
+                        value="{{$tag->id}}"
+                        @if(in_array($tag->id, old('tags',[] ))) checked @endif>
+                        <label for="tag-{{$tag->label}}" class="mr-3">{{ $tag->label }}</label>
                     @endforeach
                 </div>
-                    <div>
-                        <a href=" {{ route('admin.posts.index') }} " class="btn btn-primary mr-1">
-                            <i class="fa-solid fa-door-open"></i> All posts
-                        </a>
-                    </div>
-                    <div>
-                        <input type="submit" value="Submit" class="btn btn-success">
-                    </div>
+                @endif
+                <div>
+                    <a href=" {{ route('admin.posts.index') }} " class="btn btn-primary mr-1">
+                        <i class="fa-solid fa-door-open"></i> All posts
+                    </a>
+                </div>
+                <div>
+                    <input type="submit" value="Submit" class="btn btn-success">
+                </div>
             </form>
     </div>
 </div>
