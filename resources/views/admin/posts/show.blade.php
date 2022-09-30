@@ -19,10 +19,21 @@
         <div>
             <time>Created at: {{ $post->created_at }}</time> <br>
             <time>Updated at: {{ $post->updated_at }} </time>
-            <p>Author: @if($post->user) {{$post->user->name }}
-            @else Anonimus
-            @endif 
+            <p><strong> 
+                @if($post->user) {{$post->user->name }} </strong>
+                @else Anonimus
+                @endif 
             </p>
+
+            <div>
+                <strong> Tags: </strong>
+                <span>
+                    @foreach($post->tags as $tag)
+                    {{ $tag->label}}
+                    @endforeach
+                </span>
+
+            </div>
         </div>
     </div>
     <footer class="d-flex align-items-center justify-content-end">

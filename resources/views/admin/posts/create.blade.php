@@ -66,7 +66,7 @@
                         id="tag-{{$tag->label}}" 
                         name="tags[]" 
                         value="{{$tag->id}}"
-                        @if(in_array($tag->id, old('tags',[] ))) checked @endif>
+                        @if(in_array($tag->id, old('tags', [] ))) checked @endif>
                         <label for="tag-{{$tag->label}}" class="mr-3">{{ $tag->label }}</label>
                     @endforeach
                 </div>

@@ -33,8 +33,8 @@ class PostController extends Controller
     {
         $post = new Post();
         $categories = Category::all();
-        $tags = Tag::all();
-        return view('admin.posts.create', compact('post', 'categories', 'tags'));
+        $tags = Tag::all();;
+        return view('admin.posts.create', compact('post', 'categories', 'tags',));
     }
 
     /**
@@ -93,8 +93,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $tags = Tag::all();
-        $selected_tags= $post->tags->pluck('id')->toArray();
         $categories = Category::all();
+        $selected_tags= $post->tags->pluck('id')->toArray();
         return view('admin.posts.edit', compact('post', 'categories', 'tags', 'selected_tags'));
     }
 
@@ -127,7 +127,13 @@ class PostController extends Controller
         $post->update($data); // fill and save
         $category_id = $data['category_id'];
         $post->category_id = $category_id;
-        $post->update();
+        if(array_key_exists('tags', $data)){
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->detach();
+        } 
+        $post->update($data);
+
         return redirect()->route('admin.posts.show', $post)->with('message', 'The post has been updated');
     }
 
