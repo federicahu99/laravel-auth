@@ -19,12 +19,13 @@
         <div>
             <time>Created at: {{ $post->created_at }}</time> <br>
             <time>Updated at: {{ $post->updated_at }} </time>
-            <p><strong> 
-                @if($post->user) {{$post->user->name }} </strong>
+            <p><strong> Author: </strong>
+                @if($post->user) {{$post->user->name }} 
                 @else Anonimus
                 @endif 
             </p>
 
+            @if(count($post->tags))
             <div>
                 <strong> Tags: </strong>
                 <span>
@@ -32,8 +33,8 @@
                     {{ $tag->label}}
                     @endforeach
                 </span>
-
             </div>
+            @endif
         </div>
     </div>
     <footer class="d-flex align-items-center justify-content-end">
