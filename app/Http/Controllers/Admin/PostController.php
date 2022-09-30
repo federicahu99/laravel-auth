@@ -67,6 +67,7 @@ class PostController extends Controller
         $post->slug = Str::slug($post->title, '-');
         $post->user_id = Auth::id(); // id utente autenticato
         $post->save();
+        if(array_key_exists('tags', $data)) $post->tags()->attach($data['tags']); // tag in arrivo da create
         
         return redirect()->route('admin.posts.show', $post)->with('message', 'Post created succesfully.');
     }
@@ -91,8 +92,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $tags = Tag::all();
+        $selected_tags= $post->tags->pluck('id')->toArray();
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'selected_tags'));
     }
 
     /**

@@ -55,7 +55,20 @@
                 <div class="form-group col-2">
                     <img src="{{ $post->image ?? 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image-300x225.png'}}" alt="preview of image" id="preview" class="img-fluid">
                 </div>
-                <div class="d-flex align-items-center justify-content-between">
+                
+                    @if(count($tags))
+                    <div class="form-group col-12">
+                        <h3>Tags</h3>
+                        @foreach($tags as $tag)
+                            <input type="checkbox" 
+                            id="tag-{{$tag->label}}" 
+                            name="tags[]" 
+                            value="{{$tag->id}}"
+                            @if(in_array($tag->id, old('tags', $selected_tags ))) checked @endif>
+                            <label for="tag-{{$tag->label}}" class="mr-3">{{ $tag->label }}</label>
+                        @endforeach
+                    </div>
+                    @endif
                     <div>
                         <a href=" {{ route('admin.posts.index') }} " class="btn btn-primary mr-1">
                             <i class="fa-solid fa-door-open"></i> All posts
