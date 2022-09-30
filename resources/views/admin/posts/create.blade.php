@@ -29,18 +29,18 @@
                     <small id="title" class="form-text text-muted">Must be longer than 5 letters anche shorter than 50!</small>
                 </div>
              
-                    <div class="input-group col-12 mb-3">
-                        <div class="input-group-prepend">
-                          <label class="input-group-text" for="inputGroupSelect01">Category</label>
-                        </div>
-                        <select class="custom-select" id="category_id" name="category_id">
-                          <option selected>Categoria...</option>
+                <div class="input-group col-12 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Category</label>
+                    </div>
+                    <select class="custom-select" id="category_id" name="category_id">
+                        <option selected>Categoria...</option>
                             @foreach($categories as $category)
                             <option @if( old('category_id')) selected @endif
                             value="{{ $category->id }}"> {{ $category->label }}</option>
                             @endforeach
-                        </select>
-                      </div>
+                    </select>
+                </div>
                     
 
                 <div class="form-group col-12">
@@ -56,7 +56,14 @@
                 <div class="form-group col-2">
                     <img src="{{ $post->image ?? 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image-300x225.png'}}" alt="preview of image" id="preview" class="img-fluid">
                 </div>
-                <div class="d-flex align-items-center justify-content-between">
+                
+                    {{-- checkbox --}}
+                <div class="form-group col-12">
+                    @foreach($tags as $tag)
+                        <input type="checkbox">
+                        <label for="checkbox" class="mr-3">{{ $tag->label }}</label>
+                    @endforeach
+                </div>
                     <div>
                         <a href=" {{ route('admin.posts.index') }} " class="btn btn-primary mr-1">
                             <i class="fa-solid fa-door-open"></i> All posts
