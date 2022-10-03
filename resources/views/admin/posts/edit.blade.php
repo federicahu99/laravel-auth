@@ -38,7 +38,7 @@
                       <option selected value="">Categoria...</option>
                         @foreach($categories as $category)
                         <option @if(old('category_id', $post->category_id) == $category->id) selected @endif
-                        value="{{ $category->id }}"> {{ $category->label }}</option>
+                        value="{{ $category->id }}"> {{ $category->label }}</option>p
                         @endforeach
                     </select>
                   </div>

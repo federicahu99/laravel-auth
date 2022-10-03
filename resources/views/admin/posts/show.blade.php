@@ -14,7 +14,6 @@
 
         <p class="pt-5"> {{ $post->content }} </p>
         <p class="pt-5"> Category: @if($post->category) {{ $post->category->label }} 
-        @else Nessuna
         @endif </p>
         <div>
             <time>Created at: {{ $post->created_at }}</time> <br>
