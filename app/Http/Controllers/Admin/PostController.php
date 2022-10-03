@@ -63,7 +63,8 @@ class PostController extends Controller
 
         $data = $request->all();
         $post = new Post();
-        $post->fill($data);
+        $post->fill($data); // !!!! 
+        $post->category_id = $data['category_id'];
         $post->slug = Str::slug($post->title, '-');
         $post->user_id = Auth::id(); // id utente autenticato
         $post->save();
